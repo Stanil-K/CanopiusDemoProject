@@ -1,4 +1,6 @@
 appsettings.json
 .vs/
-bin
-obj
+CanopiusDemoApp/bin/*
+CanopiusDemoApp/obj/*
+Data/obj/*
+Data/bin/*
