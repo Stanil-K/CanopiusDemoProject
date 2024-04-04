@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CanopiusDemoApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c3a59df24015ae260c395130dc46890ace62701c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eaa67bae790d77e58606608b33db43c4cbcadd53")]
 [assembly: System.Reflection.AssemblyProductAttribute("CanopiusDemoApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CanopiusDemoApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

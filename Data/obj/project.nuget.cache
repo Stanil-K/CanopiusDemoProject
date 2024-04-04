@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9nsMiZHBv6ZKMlFNtJdsV6xLwjqHIKU76RJ0S3Yn8b/Z2Y0CytSFDJ4Rr1AosPkkALXIZUBl0LT6dFmLBH7BHg==",
+  "dgSpecHash": "AcJkRKvT34H90kqvdYBA8SeTQjDmHJq65FUengpXSXdWQDvTkb/qnMbb+ysgl8TTCmMZgLwyoG5dqtNm/1r9LA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Stanil.Kalaydzhiev\\source\\repos\\CanopiusDemoProject\\Data\\Data.csproj",
+  "projectFilePath": "C:\\Users\\Stanil.Kalaydzhiev\\Source\\Repos\\CanopiusDemoProject\\Data\\Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Stanil.Kalaydzhiev\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Stanil.Kalaydzhiev\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.25\\microsoft.aspnetcore.cryptography.internal.6.0.25.nupkg.sha512",
