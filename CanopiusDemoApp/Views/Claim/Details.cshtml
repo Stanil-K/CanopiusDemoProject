@@ -1,0 +1,32 @@
+﻿@model Data.Models.Claim
+
+<h1>Claim Details</h1>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <th>Policy Id</th>
+        <td>@Model.PolicyId</td>
+    </tr>
+    <tr>
+        <th>Date of Claim</th>
+        <td>@Model.DateOfClaim</td>
+    </tr>
+    <tr>
+        <th>Claim Amount</th>
+        <td>@Model.ClaimAmount</td>
+    </tr>
+    <tr>
+        <th>Claim Description</th>
+        <td>@Model.ClaimDescription</td>
+    </tr>
+    <tr>
+        <th>Claim Status</th>
+        <td>@Model.ClaimStatus</td>
+    </tr>
+</table>
+
+<a asp-action="All">Back to List</a>

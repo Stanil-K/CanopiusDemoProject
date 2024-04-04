@@ -1,0 +1,32 @@
+﻿@model Data.Models.Payment
+
+<h1>Payment Details</h1>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <th>Policy ID</th>
+        <td>@Model.PolicyID</td>
+    </tr>
+    <tr>
+        <th>Claim ID</th>
+        <td>@Model.ClaimId</td>
+    </tr>
+    <tr>
+        <th>Payment Date</th>
+        <td>@Model.PaymentDate.ToShortDateString()</td>
+    </tr>
+    <tr>
+        <th>Payment Amount</th>
+        <td>@Model.PaymentAmount</td>
+    </tr>
+    <tr>
+        <th>Payment Type</th>
+        <td>@Model.PaymentType</td>
+    </tr>
+</table>
+
+<a asp-action="All">Back to List</a>

@@ -1,0 +1,32 @@
+﻿@model Data.Models.Policy
+
+<h1>Policy Details</h1>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <th>Customer Id</th>
+        <td>@Model.CustomerId</td>
+    </tr>
+    <tr>
+        <th>Policy Type</th>
+        <td>@Model.PolicyType</td>
+    </tr>
+    <tr>
+        <th>Start Date</th>
+        <td>@Model.StartDate.ToShortDateString()</td>
+    </tr>
+    <tr>
+        <th>End Date</th>
+        <td>@Model.EndDate.ToShortDateString()</td>
+    </tr>
+    <tr>
+        <th>Premium Amount</th>
+        <td>@Model.PremiumAmount</td>
+    </tr>
+</table>
+
+<a asp-action="All">Back to List</a>

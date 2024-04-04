@@ -1,0 +1,58 @@
+﻿@* @model List<Data.Models.Payment>
+
+<h1>All Payments</h1>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Payment ID</th>
+            <th>Policy ID</th>
+            <th>Claim ID</th>
+            <th>Payment Date</th>
+            <th>Payment Amount</th>
+            <th>Payment Type</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var payment in Model)
+        {
+            <tr>
+                <td>@payment.Id</td>
+                <td>@payment.PolicyID</td>
+                <td>@payment.ClaimId</td>
+                <td>@payment.PaymentDate.ToShortDateString()</td>
+                <td>@payment.PaymentAmount</td>
+                <td>@payment.PaymentType</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@payment.Id" class="link-secondary">Details</a> |
+                    <a asp-action="Update" asp-route-id="@payment.Id" class="link-warning">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@payment.Id" class="link-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Add">Add New Payment</a>
+
+ *@
+ 
+@(Html.Kendo().Grid<Payment>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.Id).Title("Payment ID");
+        columns.Bound(p => p.PaymentAmount);
+        columns.Bound(p => p.PaymentDate).Format("{0:dd/MM/yyyy}");
+    })
+    .Pageable()
+    .Sortable()
+    .Scrollable()
+    .Filterable()
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(5)
+        .Read(read => read.Action("GetAllPaymentsJSON", "Payment"))
+    )
+)

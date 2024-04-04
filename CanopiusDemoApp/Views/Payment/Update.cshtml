@@ -1,0 +1,36 @@
+﻿@model Data.Models.Payment
+
+<style>
+    label {
+        color: whitesmoke;
+    }
+</style>
+
+<h1>Edit Payment</h1>
+
+<form asp-action="Update" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div>
+        <label asp-for="PolicyID">Policy ID</label>
+        <input asp-for="PolicyID" />
+    </div>
+    <div>
+        <label asp-for="ClaimId">Claim ID</label>
+        <input asp-for="ClaimId" />
+    </div>
+    <div>
+        <label asp-for="PaymentDate">Payment Date</label>
+        <input asp-for="PaymentDate" type="date" />
+    </div>
+    <div>
+        <label asp-for="PaymentAmount">Payment Amount</label>
+        <input asp-for="PaymentAmount" />
+    </div>
+    <div>
+        <label asp-for="PaymentType">Payment Type</label>
+        <input asp-for="PaymentType" />
+    </div>
+    <button type="submit">Update</button>
+</form>
+
+<a asp-action="All">Back to List</a>

@@ -1,0 +1,32 @@
+﻿@model Data.Models.Customer
+
+<h1>Customer Details</h1>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <th>Name</th>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <th>Address</th>
+        <td>@Model.Address</td>
+    </tr>
+    <tr>
+        <th>Phone</th>
+        <td>@Model.Phone</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <th>Date of Birth</th>
+        <td>@Model.DateofBirth.ToShortDateString()</td>
+    </tr>
+</table>
+
+<a asp-action="All">Back to List</a>

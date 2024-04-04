@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanopiusDemoApp", "CanopiusDemoApp\CanopiusDemoApp.csproj", "{839D076F-8308-4160-B45D-E0291A892CF9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D8FCAFB7-031E-4999-86EA-37897184B2AB} = {D8FCAFB7-031E-4999-86EA-37897184B2AB}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{D8FCAFB7-031E-4999-86EA-37897184B2AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{839D076F-8308-4160-B45D-E0291A892CF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{839D076F-8308-4160-B45D-E0291A892CF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{839D076F-8308-4160-B45D-E0291A892CF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{839D076F-8308-4160-B45D-E0291A892CF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8FCAFB7-031E-4999-86EA-37897184B2AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8FCAFB7-031E-4999-86EA-37897184B2AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8FCAFB7-031E-4999-86EA-37897184B2AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8FCAFB7-031E-4999-86EA-37897184B2AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6205EC18-FC46-47B2-BF60-289EB245C5EE}
+	EndGlobalSection
+EndGlobal

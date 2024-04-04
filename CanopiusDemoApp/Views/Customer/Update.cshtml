@@ -1,0 +1,36 @@
+﻿@model Data.Models.Customer
+
+<style>
+    label {
+        color: whitesmoke;
+    }
+</style>
+
+<h1>Edit Customer</h1>
+
+<form asp-action="Update" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div>
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" />
+    </div>
+    <div>
+        <label asp-for="Address">Address</label>
+        <input asp-for="Address" />
+    </div>
+    <div>
+        <label asp-for="Phone">Phone</label>
+        <input asp-for="Phone" />
+    </div>
+    <div>
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" />
+    </div>
+    <div>
+        <label asp-for="DateofBirth">Date of Birth</label>
+        <input asp-for="DateofBirth" type="date" />
+    </div>
+    <button type="submit">Update</button>
+</form>
+
+<a asp-action="All">Back to List</a>

@@ -1,0 +1,36 @@
+﻿@model Data.Models.Claim
+
+<style>
+    label {
+        color: whitesmoke;
+    }
+</style>
+
+<h1>Edit Claim</h1>
+
+<form asp-action="Update" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div>
+        <label asp-for="PolicyId">Policy Id</label>
+        <input asp-for="PolicyId" />
+    </div>
+    <div>
+        <label asp-for="DateOfClaim">Date of Claim</label>
+        <input asp-for="DateOfClaim" type="date" />
+    </div>
+    <div>
+        <label asp-for="ClaimAmount">Claim Amount</label>
+        <input asp-for="ClaimAmount" />
+    </div>
+    <div>
+        <label asp-for="ClaimDescription">Claim Description</label>
+        <input asp-for="ClaimDescription" />
+    </div>
+    <div>
+        <label asp-for="ClaimStatus">Claim Status</label>
+        <input asp-for="ClaimStatus" />
+    </div>
+    <button type="submit">Update</button>
+</form>
+
+<a asp-action="All">Back to List</a>
