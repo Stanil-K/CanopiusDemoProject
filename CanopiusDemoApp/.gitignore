@@ -1,3 +1,6 @@
-appsettings.Development.json
-bin/
-obj/
+appsettings.json
+.vs/
+CanopiusDemoApp/bin/*
+CanopiusDemoApp/obj/*
+Data/obj/*
+Data/bin/*
