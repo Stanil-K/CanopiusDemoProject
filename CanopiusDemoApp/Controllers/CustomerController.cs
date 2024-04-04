@@ -47,6 +47,18 @@ namespace CanopiusDemoApp.Controllers
             return View();
         }
 
+
+        //IActionResult Add([DataSourceRequest] DataSourceRequest request, Customer newCustomer)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        customerRepository.Add(newCustomer);
+        //    }
+
+        //    // Return a collection which contains only the newly created item and any validation errors.
+        //    return Json(new[] { newCustomer }.ToDataSourceResult(request, ModelState));
+        //}
+
         [HttpPost]
         public IActionResult Add(Customer customer)
         {
@@ -75,6 +87,16 @@ namespace CanopiusDemoApp.Controllers
                 throw new Exception($"An error occurred while fetching customer with id {id}");
             }
         }
+
+        //public IActionResult UpdateCustomer([DataSourceRequest] DataSourceRequest request, Customer customerToUpdate)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        customerRepository.Update(customerToUpdate);
+        //    }
+
+        //    return Json(new[] { customerToUpdate }.ToDataSourceResult(request, ModelState));
+        //}
 
         [HttpPost]
         public IActionResult Update(Customer customer)

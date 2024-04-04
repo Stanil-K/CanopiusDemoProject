@@ -37,6 +37,8 @@
 <a asp-action="Add">Add New Customer</a> *@
 
 
+<h1>All Customers</h1>
+
 @(Html.Kendo().Grid<Customer>()
     .Name("grid")
     .Columns(columns =>
@@ -54,5 +56,8 @@
         .Ajax()
         .PageSize(5)
         .Read(read => read.Action("GetAllCustomersJSON", "Customer"))
+        .Create("Add","Customer")
+        .Update("Update","Customer")
+        .Destroy("Delete","Customer")
      )
 )
