@@ -1,34 +1,66 @@
-﻿@model Data.Models.Customer
+﻿<div id="validation-success"></div>
+    @(Html.Kendo().Form<Customer>()
+        .Name("form")
+        .HtmlAttributes(new { action = "Add", method = "POST" })
+        .Validatable(v =>
+        {
+            v.ValidateOnBlur(true);
+            v.ValidationSummary(vs => vs.Enable(false));
+        })
+        .Items(items =>
+        {
+            items.AddGroup()
+            .Label("Add New Customer")
+            .Items(i =>
+            {
+                i.Add()
+                .Field(f => f.Name)
+                .Label(l => l.Text("Customer name:"));
 
-<h1>Add Customer</h1>
+                i.Add()
+                .Field(f => f.Phone)
+                .Label(l => l.Text("Phone number:"));
+
+                i.Add()
+                .Field(f => f.Address)
+                .Label(l => l.Text("Address:"));
+
+                i.Add()
+                .Field(f => f.Email)
+                .Label(l => l.Text("Email:"));
+
+                i.Add()
+                .Field(f => f.DateofBirth)
+                .Label(l => l.Text("Date of Birth:"))
+                .Editor(e => e.DatePicker());
+            });
+        })
+        .Events(ev => ev.ValidateField("onFormValidateField").Submit("onFormSubmit").Clear("onFormClear"))
+        )
+
 <style>
-    label{
-        color:whitesmoke;
+    label {
+        color: whitesmoke;
     }
 
+    .k-form fieldset legend {
+        color: whitesmoke;
+    }
 </style>
-<form asp-action="Add" method="post">
-    <div>
-        <label asp-for="Name" class="text-color">Name</label>
-        <input asp-for="Name" />
-    </div>
-    <div>
-        <label asp-for="Address">Address</label>
-        <input asp-for="Address" />
-    </div>
-    <div>
-        <label asp-for="Phone">Phone</label>
-        <input asp-for="Phone" />
-    </div>
-    <div>
-        <label asp-for="Email">Email</label>
-        <input asp-for="Email" />
-    </div>
-    <div>
-        <label asp-for="DateofBirth">Date of Birth</label>
-        <input asp-for="DateofBirth" type="date" />
-    </div>
-    <button type="submit">Add</button>
-</form>
 
-<a asp-action="All">Back to List</a>
+<script>
+    function onFormValidateField(e) {
+        $("#validation-success").html("");
+    }
+
+    function onFormSubmit(e) {
+        if (!$("#form").valid()) {
+            e.preventDefault();
+        }
+    }
+
+    function onFormClear(e) {
+        $("#validation-success").html("");
+    }
+</script>
+

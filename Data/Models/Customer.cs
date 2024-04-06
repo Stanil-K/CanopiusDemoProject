@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Data.Models
 {
@@ -24,6 +25,7 @@ namespace Data.Models
         [EmailAddress]
         public string Email { get; set; }
 
+        [DisplayName("Date of Birth")]
         public DateTime DateofBirth { get; set; }
     }
 }

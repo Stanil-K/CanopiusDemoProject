@@ -3,6 +3,7 @@ using Data.Repositories;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using Telerik.SvgIcons;
 
 namespace CanopiusDemoApp.Controllers
@@ -18,7 +19,7 @@ namespace CanopiusDemoApp.Controllers
 
         public IActionResult All()
         {
-           return View();
+            return View();
         }
 
         [HttpPost]
@@ -27,6 +28,14 @@ namespace CanopiusDemoApp.Controllers
             List<Customer> customers = customerRepository.GetAll();
             return Json(customers.ToDataSourceResult(request));
         }
+
+        [HttpPost]
+        public ActionResult GetCustomerJSON([DataSourceRequest] DataSourceRequest request, int id)
+        {
+            var customer = customerRepository.GetById(id);
+            return Json(customer.Id);
+        }
+
 
         public IActionResult Details(int id)
         {
@@ -41,40 +50,6 @@ namespace CanopiusDemoApp.Controllers
             }
         }
 
-        [HttpGet]
-        public IActionResult Add()
-        {
-            return View();
-        }
-
-
-        //IActionResult Add([DataSourceRequest] DataSourceRequest request, Customer newCustomer)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        customerRepository.Add(newCustomer);
-        //    }
-
-        //    // Return a collection which contains only the newly created item and any validation errors.
-        //    return Json(new[] { newCustomer }.ToDataSourceResult(request, ModelState));
-        //}
-
-        [HttpPost]
-        public IActionResult Add(Customer customer)
-        {
-            try
-            {
-                customerRepository.Add(customer);
-                return RedirectToAction("All");
-            }
-            catch (Exception)
-            {
-                throw new Exception("An error occurred while adding customer");
-            }
-        }
-
-
-        [HttpGet]
         public IActionResult Update(int id)
         {
             try
@@ -82,36 +57,62 @@ namespace CanopiusDemoApp.Controllers
                 var customer = customerRepository.GetById(id);
                 return View(customer);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception($"An error occurred while fetching customer with id {id}");
+
+                throw new Exception($"Exception occured when loading a customer.- {ex.Message}");
             }
         }
 
-        //public IActionResult UpdateCustomer([DataSourceRequest] DataSourceRequest request, Customer customerToUpdate)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        customerRepository.Update(customerToUpdate);
-        //    }
-
-        //    return Json(new[] { customerToUpdate }.ToDataSourceResult(request, ModelState));
-        //}
 
         [HttpPost]
         public IActionResult Update(Customer customer)
         {
-            try
+            if (ModelState.IsValid)
             {
-                customerRepository.Update(customer);
-                return RedirectToAction("All");
+                try
+                {
+                    customerRepository.Update(customer);
+                    return RedirectToAction("All");
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"Exception occured when updating customer. - {ex.Message}");
+                }
+
             }
-            catch (Exception)
-            {
-                throw new Exception("An error occurred while updating customer");
-            }
+
+            return View(customer);
         }
 
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult Add(Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    customerRepository.Add(customer);
+                    return RedirectToAction("All");
+                }
+                catch (Exception)
+                {
+
+                    throw new Exception("Exception occured when adding new customer.");
+                }
+            }
+
+            return View(customer);
+        }
+
+        [HttpPost]
         public IActionResult Delete(int id)
         {
             try

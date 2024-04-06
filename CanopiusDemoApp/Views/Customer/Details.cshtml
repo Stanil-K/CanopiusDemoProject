@@ -1,4 +1,4 @@
-﻿@model Data.Models.Customer
+﻿@* @model Customer
 
 <h1>Customer Details</h1>
 
@@ -30,3 +30,47 @@
 </table>
 
 <a asp-action="All">Back to List</a>
+ *@
+ 
+@model Customer
+
+<h4>Customer Details</h4>
+
+@(Html.Kendo().PanelBar()
+    .Name("panelbar")
+    .Items(panelbar =>
+    {
+        panelbar.Add().Text("Customer ID: " + Model.Id).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Name: " + Model.Name).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Address: " + Model.Address).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Phone: " + Model.Phone).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Email: " + Model.Email).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Date of Birth: " + Model.DateofBirth.ToShortDateString()).HtmlAttributes(new { @class = "panel-text" });
+    })
+)
+<a asp-action="Update" class="custom-link">Update Customer Information</a>
+<a asp-action="All" class="custom-link">Back to List</a>
+
+<style>
+    h4{
+        color: whitesmoke;
+    }
+
+    .k-panelbar-item-text{
+        color:indigo;
+    }
+
+  .custom-link {
+  padding: 5px 10px; 
+  background-color: whitesmoke;
+  text-decoration: none; 
+  border-radius: 5px;
+        color: indigo;
+ }
+
+  .custom-link:hover {
+  background-color: lavender;
+            color: indigo;
+ }
+
+</style>

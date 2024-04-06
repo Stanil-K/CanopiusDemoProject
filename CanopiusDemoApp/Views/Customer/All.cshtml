@@ -1,45 +1,7 @@
-﻿@* @model List<Data.Models.Customer>
+﻿<h4>All Customers</h4>
 
-<h1>All Customers</h1>
-
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>Customer ID</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Date of Birth</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var customer in Model)
-        {
-            <tr>
-                <td>@customer.Id</td>
-                <td>@customer.Name</td>
-                <td>@customer.Address</td>
-                <td>@customer.Phone</td>
-                <td>@customer.Email</td>
-                <td>@customer.DateofBirth.ToShortDateString()</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@customer.Id" class="link-secondary">Details</a> |
-                    <a asp-action="Update" asp-route-id="@customer.Id" class="link-warning">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@customer.Id" class="link-danger">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<a asp-action="Add">Add New Customer</a> *@
-
-
-<h1>All Customers</h1>
-
-@(Html.Kendo().Grid<Customer>()
+@(
+Html.Kendo().Grid<Customer>()
     .Name("grid")
     .Columns(columns =>
     {
@@ -47,6 +9,17 @@
         columns.Bound(p => p.Name);
         columns.Bound(p => p.Phone);
         columns.Bound(p => p.Email);
+        columns.Command(command =>
+                {
+                    command.Custom("Update").Text("Update").Click("onUpdate");
+                    command.Custom("Details").Text("Details").Click("onDetails");
+                    command.Destroy();
+                }).Width(200);
+
+    })
+    .ToolBar(t =>
+    {
+        t.ClientTemplate("<button class='myButtonClass' onclick='location.href=\"" + Url.Action("Add", "Customer") + "\";'>Add New Customer</button>");
     })
     .Pageable()
     .Sortable()
@@ -55,9 +28,50 @@
     .DataSource(dataSource => dataSource
         .Ajax()
         .PageSize(5)
+        .Model(m =>
+        {
+            m.Id(p => p.Id);
+        })
         .Read(read => read.Action("GetAllCustomersJSON", "Customer"))
-        .Create("Add","Customer")
-        .Update("Update","Customer")
-        .Destroy("Delete","Customer")
+        .Create(c => c.Action("Add", "Customer"))
+        .Update(u => u.Action("Update", "Customer"))
+        .Destroy(d => d.Action("Delete", "Customer"))
      )
 )
+
+<script>
+
+    function onUpdate(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        window.location.href = '/Customer/Update/' + dataItem.Id;
+    }
+
+    function onDetails(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        window.location.href = '/Customer/Details/' + dataItem.Id;
+    }
+
+</script>
+
+<style>
+    h4{
+        color: whitesmoke;
+    }
+
+    .k-button-text{
+        color: indigo;
+    }
+
+    .myButtonClass {
+        color:whitesmoke;
+        background:indigo;
+        border-radius:5px;
+        border:1px;
+        border-color:indigo;
+        padding: 3px 5px;
+        margin: 3px 5px;
+    }
+
+</style>
