@@ -1,42 +1,4 @@
-﻿@* @model List<Data.Models.Claim>
-
-<h1>All Claims</h1>
-
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>Claim ID</th>
-            <th>Policy ID</th>
-            <th>Date of Claim</th>
-            <th>Claim Amount</th>
-            <th>Claim Description</th>
-            <th>Claim Status</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var claim in Model)
-        {
-            <tr>
-                <td>@claim.Id</td>
-                <td>@claim.PolicyId</td>
-                <td>@claim.DateOfClaim</td>
-                <td>@claim.ClaimAmount</td>
-                <td>@claim.ClaimDescription</td>
-                <td>@claim.ClaimStatus</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@claim.Id" class="link-secondary">Details</a> |
-                    <a asp-action="Update" asp-route-id="@claim.Id" class="link-warning">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@claim.Id" class="link-danger">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-<a asp-action="Add">Add New Claim</a>
- *@
- 
-<h1>All Claims</h1>
+﻿<h1>All Claims</h1>
 
 @(Html.Kendo().Grid<Claim>()
     .Name("grid")
