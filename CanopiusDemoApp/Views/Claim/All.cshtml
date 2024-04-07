@@ -46,6 +46,16 @@
         columns.Bound(c => c.ClaimAmount);
         columns.Bound(c => c.ClaimStatus);
         columns.Bound(c => c.DateOfClaim).Format("{0:dd/MM/yyyy}");
+        columns.Command(command =>
+                {
+                    command.Custom("Update").Text("Update").Click("onUpdate");
+                    command.Custom("Details").Text("Details").Click("onDetails");
+                    command.Destroy();
+                }).Width(300);
+    })
+    .ToolBar(t =>
+    {
+        t.ClientTemplate("<button class='myButtonClass' onclick='location.href=\"" + Url.Action("Add", "Customer") + "\";'>Add New Claim</button>");
     })
     .Pageable()
     .Sortable()
@@ -55,5 +65,45 @@
         .Ajax()
         .PageSize(5)
         .Read(read => read.Action("GetAllClaimsJSON", "Claim"))
+        .Create(c => c.Action("Add", "Claim"))
+        .Update(u => u.Action("Update", "Claim"))
+        .Destroy(d => d.Action("Delete", "Claim"))
     )
 )
+
+<script>
+
+    function onUpdate(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        window.location.href = '/Claim/Update/' + dataItem.Id;
+    }
+
+    function onDetails(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        window.location.href = '/Claim/Details/' + dataItem.Id;
+    }
+
+</script>
+
+<style>
+    h4 {
+        color: whitesmoke;
+    }
+
+    .k-button-text {
+        color: indigo;
+    }
+
+    .myButtonClass {
+        color: whitesmoke;
+        background: indigo;
+        border-radius: 5px;
+        border: 1px;
+        border-color: indigo;
+        padding: 3px 5px;
+        margin: 3px 5px;
+    }
+
+</style>

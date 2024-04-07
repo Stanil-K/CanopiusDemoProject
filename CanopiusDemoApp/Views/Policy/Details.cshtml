@@ -1,32 +1,42 @@
-﻿@model Data.Models.Policy
+﻿@model Policy
 
-<h1>Policy Details</h1>
+<h4>Policy Details</h4>
 
-<table class="table">
-    <tr>
-        <th>Id</th>
-        <td>@Model.Id</td>
-    </tr>
-    <tr>
-        <th>Customer Id</th>
-        <td>@Model.CustomerId</td>
-    </tr>
-    <tr>
-        <th>Policy Type</th>
-        <td>@Model.PolicyType</td>
-    </tr>
-    <tr>
-        <th>Start Date</th>
-        <td>@Model.StartDate.ToShortDateString()</td>
-    </tr>
-    <tr>
-        <th>End Date</th>
-        <td>@Model.EndDate.ToShortDateString()</td>
-    </tr>
-    <tr>
-        <th>Premium Amount</th>
-        <td>@Model.PremiumAmount</td>
-    </tr>
-</table>
+@(Html.Kendo().PanelBar()
+    .Name("panelbar")
+    .Items(panelbar =>
+    {
+        panelbar.Add().Text("Policy ID: " + Model.Id).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Customer ID: " + Model.CustomerId).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Policy type: " + Model.PolicyType).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Start date: " + Model.StartDate.ToShortDateString()).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("End date: " + Model.EndDate.ToShortDateString()).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Premium amount: " + Model.PremiumAmount).HtmlAttributes(new { @class = "panel-text" });
+    })
+)
+<a asp-action="Update" class="custom-link">Update Policy Information</a>
+<a asp-action="All" class="custom-link">Back to List</a>
 
-<a asp-action="All">Back to List</a>
+<style>
+    h4{
+        color: whitesmoke;
+    }
+
+    .k-panelbar-item-text{
+        color:indigo;
+    }
+
+  .custom-link {
+  padding: 5px 10px; 
+  background-color: whitesmoke;
+  text-decoration: none; 
+  border-radius: 5px;
+        color: indigo;
+ }
+
+  .custom-link:hover {
+  background-color: lavender;
+            color: indigo;
+ }
+
+</style>

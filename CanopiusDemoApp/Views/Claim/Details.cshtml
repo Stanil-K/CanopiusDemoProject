@@ -1,4 +1,4 @@
-﻿@model Data.Models.Claim
+﻿@* @model Data.Models.Claim
 
 <h1>Claim Details</h1>
 
@@ -29,4 +29,48 @@
     </tr>
 </table>
 
-<a asp-action="All">Back to List</a>
+<a asp-action="All">Back to List</a> *@
+
+
+@model Claim
+
+<h4>Claim Details</h4>
+
+@(Html.Kendo().PanelBar()
+    .Name("panelbar")
+    .Items(panelbar =>
+    {
+        panelbar.Add().Text("Claim ID: " + Model.Id).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Policy ID: " + Model.PolicyId).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Claim amount: " + Model.ClaimAmount).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Claim status: " + Model.ClaimStatus).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Claim description: " + Model.ClaimDescription).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Date of Claim: " + Model.DateOfClaim.ToShortDateString()).HtmlAttributes(new { @class = "panel-text" });
+    })
+)
+<a asp-action="Update" class="custom-link">Update Claim Information</a>
+<a asp-action="All" class="custom-link">Back to List</a>
+
+<style>
+    h4{
+        color: whitesmoke;
+    }
+
+    .k-panelbar-item-text{
+        color:indigo;
+    }
+
+  .custom-link {
+  padding: 5px 10px; 
+  background-color: whitesmoke;
+  text-decoration: none; 
+  border-radius: 5px;
+        color: indigo;
+ }
+
+  .custom-link:hover {
+  background-color: lavender;
+            color: indigo;
+ }
+
+</style>

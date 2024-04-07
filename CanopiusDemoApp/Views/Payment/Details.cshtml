@@ -1,32 +1,43 @@
-﻿@model Data.Models.Payment
+﻿@model Payment
 
-<h1>Payment Details</h1>
+<h4>Payment Details</h4>
 
-<table class="table">
-    <tr>
-        <th>Id</th>
-        <td>@Model.Id</td>
-    </tr>
-    <tr>
-        <th>Policy ID</th>
-        <td>@Model.PolicyID</td>
-    </tr>
-    <tr>
-        <th>Claim ID</th>
-        <td>@Model.ClaimId</td>
-    </tr>
-    <tr>
-        <th>Payment Date</th>
-        <td>@Model.PaymentDate.ToShortDateString()</td>
-    </tr>
-    <tr>
-        <th>Payment Amount</th>
-        <td>@Model.PaymentAmount</td>
-    </tr>
-    <tr>
-        <th>Payment Type</th>
-        <td>@Model.PaymentType</td>
-    </tr>
-</table>
+@(Html.Kendo().PanelBar()
+    .Name("panelbar")
+    .Items(panelbar =>
+    {
+        panelbar.Add().Text("Payment ID: " + Model.Id).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Policy ID: " + Model.PolicyID).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Claim ID: " + Model.ClaimId).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Payment name: " + Model.PaymentType).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Payment amount: " + Model.PaymentAmount).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Payment date: " + Model.PaymentDate.ToShortDateString()).HtmlAttributes(new { @class = "panel-text" });
 
-<a asp-action="All">Back to List</a>
+    })
+)
+<a asp-action="Update" class="custom-link">Update Payment Information</a>
+<a asp-action="All" class="custom-link">Back to List</a>
+
+<style>
+    h4{
+        color: whitesmoke;
+    }
+
+    .k-panelbar-item-text{
+        color:indigo;
+    }
+
+  .custom-link {
+  padding: 5px 10px; 
+  background-color: whitesmoke;
+  text-decoration: none; 
+  border-radius: 5px;
+        color: indigo;
+ }
+
+  .custom-link:hover {
+  background-color: lavender;
+            color: indigo;
+ }
+
+</style>

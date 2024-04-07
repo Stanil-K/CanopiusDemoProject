@@ -1,55 +1,23 @@
-﻿@* @model List<Data.Models.Policy>
-
-<h1>All Policies</h1>
-
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>Policy ID</th>
-            <th>Customer Name</th>
-            <th>Policy Type</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Premium Amount</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var policy in Model)
-        {
-            <tr>
-                <td>@policy.Id</td>
-                <td>@policy.Customer.Name</td>
-                <td>@policy.PolicyType</td>
-                <td>@policy.StartDate.ToShortDateString()</td>
-                <td>@policy.EndDate.ToShortDateString()</td>
-                <td>@policy.PremiumAmount</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@policy.Id" class="link-secondary">Details</a> |
-                    <a asp-action="Update" asp-route-id="@policy.Id" class="link-warning">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@policy.Id" class="link-danger">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<a asp-action="Add">Add New Policy</a>
- *@
- 
-<h1>All Policies</h1>
+﻿<h4>All Policies</h4>
                 
 @(Html.Kendo().Grid<Policy>()
     .Name("grid")
     .Columns(columns =>
     {
-        @*         columns.Bound(p => p.Id).Title("Payment ID");
-        columns.Bound(p => p.PaymentAmount);
-        columns.Bound(p => p.PaymentDate).Format("{0:dd/MM/yyyy}"); *@
         columns.Bound(p => p.Id).Title("Policy ID");
         columns.Bound(p => p.PolicyType);
         columns.Bound(p => p.StartDate).Format("{0:dd/MM/yyyy}");
         columns.Bound(p => p.EndDate).Format("{0:dd/MM/yyyy}");
+        columns.Command(command =>
+                {
+                    command.Custom("Update").Text("Update").Click("onUpdate");
+                    command.Custom("Details").Text("Details").Click("onDetails");
+                    command.Destroy();
+                }).Width(300);
+    })
+    .ToolBar(t =>
+    {
+        t.ClientTemplate("<button class='myButtonClass' onclick='location.href=\"" + Url.Action("Add", "Policy") + "\";'>Add New Policy</button>");
     })
     .Pageable()
     .Sortable()
@@ -59,8 +27,45 @@
         .Ajax()
         .PageSize(5)
         .Read(read => read.Action("GetAllPoliciesJSON", "Policy"))
-        .Create("Add", "")
-        .Update("","")
-        .Destroy("","")
+        .Create("Add", "Policy")
+        .Update("Update","Policy")
+        .Destroy("Delete", "Policy")
     )
 )
+
+<script>
+
+    function onUpdate(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        window.location.href = '/Policy/Update/' + dataItem.Id;
+    }
+
+    function onDetails(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        window.location.href = '/Policy/Details/' + dataItem.Id;
+    }
+
+</script>
+
+<style>
+    h4 {
+        color: whitesmoke;
+    }
+
+    .k-button-text {
+        color: indigo;
+    }
+
+    .myButtonClass {
+        color: whitesmoke;
+        background: indigo;
+        border-radius: 5px;
+        border: 1px;
+        border-color: indigo;
+        padding: 3px 5px;
+        margin: 3px 5px;
+    }
+
+</style>
