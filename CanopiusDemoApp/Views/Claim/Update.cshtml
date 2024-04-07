@@ -1,36 +1,76 @@
-﻿@model Data.Models.Claim
+﻿<div id="validation-success"></div>
+@(Html.Kendo().Form<Claim>()
+    .Name("form")
+    .HtmlAttributes(new { action = "Update", method = "POST" })
+    .Validatable(v =>
+    {
+        v.ValidateOnBlur(true);
+        v.ValidationSummary(vs => vs.Enable(false));
+    })
+    .Items(items =>
+    {
+        items.AddGroup()
+            .Label("Update Claim Information")
+            .Items(i =>
+            {
+                i.Add()
+                    .Field(f => f.ClaimAmount)
+                    .Label(l => l.Text("Claim amount:"));
+
+                i.Add()
+                    .Field(f => f.ClaimDescription)
+                    .Label(l => l.Text("Claim description:"));
+
+                i.Add()
+                    .Field(f => f.ClaimStatus)
+                    .Label(l => l.Text("Claim status:"));
+
+                i.Add()
+                    .Field(f => f.DateOfClaim)
+                    .Label(l => l.Text("Date of Claim:"))
+                    .Editor(e => e.DatePicker().Name("DateOfClaim").Value(Model.DateOfClaim));
+
+                i.Add()
+                    .Field(f => f.Id)
+                    .Label(l => l.Text("Hidden Claim ID:"))
+                    .Editor(e => e.Hidden());
+
+            });
+    })
+    .Events(ev => ev.ValidateField("onFormValidateField").Submit("onFormSubmit").Clear("onFormClear"))
+)
+
+
+<script>
+    function onFormValidateField(e) {
+        $("#validation-success").html("");
+    }
+
+    function onFormSubmit(e) {
+        if (!$("#form").valid()) {
+            e.preventDefault();
+        }
+    }
+
+
+    function onFormClear(e) {
+        $("#validation-success").html("");
+    }
+</script>
 
 <style>
-    label {
+    label{
+        color:whitesmoke;
+    }
+
+    .k-form fieldset legend{
         color: whitesmoke;
+    }
+
+    .k-form-buttons button {
+        color: indigo;
+        background-color: whitesmoke;
     }
 </style>
 
-<h1>Edit Claim</h1>
 
-<form asp-action="Update" method="post">
-    <input type="hidden" asp-for="Id" />
-    <div>
-        <label asp-for="PolicyId">Policy Id</label>
-        <input asp-for="PolicyId" />
-    </div>
-    <div>
-        <label asp-for="DateOfClaim">Date of Claim</label>
-        <input asp-for="DateOfClaim" type="date" />
-    </div>
-    <div>
-        <label asp-for="ClaimAmount">Claim Amount</label>
-        <input asp-for="ClaimAmount" />
-    </div>
-    <div>
-        <label asp-for="ClaimDescription">Claim Description</label>
-        <input asp-for="ClaimDescription" />
-    </div>
-    <div>
-        <label asp-for="ClaimStatus">Claim Status</label>
-        <input asp-for="ClaimStatus" />
-    </div>
-    <button type="submit">Update</button>
-</form>
-
-<a asp-action="All">Back to List</a>

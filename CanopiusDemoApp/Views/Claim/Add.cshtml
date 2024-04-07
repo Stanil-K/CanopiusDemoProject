@@ -1,43 +1,4 @@
-﻿@* @model Data.Models.Claim
-
-<style>
-    label {
-        color: whitesmoke;
-    }
-</style>
-
-<h1>Add Claim</h1>
-
-<form asp-action="Add" method="post">
-    <div>
-        <label asp-for="PolicyId">Policy</label>
-        <select asp-for="PolicyId" asp-items="@ViewBag.PoliciesWithoutClaims">
-            <option value="">-- Select Policy --</option>
-        </select>
-    </div>
-    <div>
-        <label asp-for="DateOfClaim">Date of Claim</label>CreateCreat
-        <input asp-for="DateOfClaim" type="date" />
-    </div>
-    <div> 
-        <label asp-for="ClaimAmount">Claim Amount</label>
-        <input asp-for="ClaimAmount" />
-    </div>
-    <div>
-        <label asp-for="ClaimDescription">Claim Description</label>
-        <input asp-for="ClaimDescription" />
-    </div>
-    <div>
-        <label asp-for="ClaimStatus">Claim Status</label>
-        <input asp-for="ClaimStatus" />
-    </div>
-    <button type="submit">Add</button>
-</form>
-
-<a asp-action="All">Back to List</a> *@
-
-
-<div id="validation-success"></div>
+﻿<div id="validation-success"></div>
 @(Html.Kendo().Form<Claim>()
         .Name("form")
         .HtmlAttributes(new { action = "Add", method = "POST" })
