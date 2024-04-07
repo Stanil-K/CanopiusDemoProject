@@ -1,4 +1,4 @@
-﻿<h1>All Claims</h1>
+﻿<h4>All Claims</h4>
 
 @(Html.Kendo().Grid<Claim>()
     .Name("grid")
@@ -12,12 +12,12 @@
                 {
                     command.Custom("Update").Text("Update").Click("onUpdate");
                     command.Custom("Details").Text("Details").Click("onDetails");
-                    command.Destroy();
+                    command.Custom("Delete").Text("Delete").Click("onDelete");
                 }).Width(300);
     })
     .ToolBar(t =>
     {
-        t.ClientTemplate("<button class='myButtonClass' onclick='location.href=\"" + Url.Action("Add", "Customer") + "\";'>Add New Claim</button>");
+        t.ClientTemplate("<button class='myButtonClass' onclick='location.href=\"" + Url.Action("Add", "Claim") + "\";'>Add New Claim</button>");
     })
     .Pageable()
     .Sortable()
@@ -45,6 +45,12 @@
         e.preventDefault();
         var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
         window.location.href = '/Claim/Details/' + dataItem.Id;
+    } 
+    
+    function onDelete(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        window.location.href = '/Claim/Delete/' + dataItem.Id;
     }
 
 </script>

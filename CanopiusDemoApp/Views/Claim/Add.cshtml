@@ -1,4 +1,4 @@
-﻿@model Data.Models.Claim
+﻿@* @model Data.Models.Claim
 
 <style>
     label {
@@ -19,7 +19,7 @@
         <label asp-for="DateOfClaim">Date of Claim</label>CreateCreat
         <input asp-for="DateOfClaim" type="date" />
     </div>
-    <div>
+    <div> 
         <label asp-for="ClaimAmount">Claim Amount</label>
         <input asp-for="ClaimAmount" />
     </div>
@@ -34,4 +34,76 @@
     <button type="submit">Add</button>
 </form>
 
-<a asp-action="All">Back to List</a>
+<a asp-action="All">Back to List</a> *@
+
+
+<div id="validation-success"></div>
+@(Html.Kendo().Form<Claim>()
+        .Name("form")
+        .HtmlAttributes(new { action = "Add", method = "POST" })
+        .Validatable(v =>
+        {
+            v.ValidateOnBlur(true);
+            v.ValidationSummary(vs => vs.Enable(false));
+        })
+        .Items(items =>
+        {
+            items.AddGroup()
+            .Label("Add New Claim")
+            .Items(i =>
+            {
+                i.Add()
+                    .Field(f => f.PolicyId)
+                    .Label(l => l.Text("Policy"))
+                    .Editor(e => e.DropDownList()
+                                .BindTo((IEnumerable<SelectListItem>)ViewBag.PoliciesWithoutClaims)
+                    );
+
+                i.Add()
+                .Field(f => f.ClaimAmount)
+                .Label(l => l.Text("Claim amount:"));
+
+                i.Add()
+                .Field(f => f.ClaimDescription)
+                .Label(l => l.Text("Claim description:"));
+
+                i.Add()
+                .Field(f => f.ClaimStatus)
+                .Label(l => l.Text("Claim status:"));
+
+                i.Add()
+                .Field(f => f.DateOfClaim)
+                .Label(l => l.Text("Date of Claim:"))
+                .Editor(e => e.DatePicker());
+
+            });
+        })
+        .Events(ev => ev.ValidateField("onFormValidateField").Submit("onFormSubmit").Clear("onFormClear"))
+        )
+
+<style>
+    label {
+        color: whitesmoke;
+    }
+
+    .k-form fieldset legend {
+        color: whitesmoke;
+    }
+</style>
+
+<script>
+    function onFormValidateField(e) {
+        $("#validation-success").html("");
+    }
+
+    function onFormSubmit(e) {
+        if (!$("#form").valid()) {
+            e.preventDefault();
+        }
+    }
+
+    function onFormClear(e) {
+        $("#validation-success").html("");
+    }
+</script>
+
