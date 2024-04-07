@@ -12,7 +12,7 @@
                 {
                     command.Custom("Update").Text("Update").Click("onUpdate");
                     command.Custom("Details").Text("Details").Click("onDetails");
-                    command.Destroy();
+                    command.Custom("Delete").Text("Delete").Click("onDelete");
                 }).Width(300);
     })
     .ToolBar(t =>
@@ -45,6 +45,12 @@
         e.preventDefault();
         var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
         window.location.href = '/Policy/Details/' + dataItem.Id;
+    }
+
+    function onDelete(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        window.location.href = '/Policy/Delete/' + dataItem.Id;
     }
 
 </script>

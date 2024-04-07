@@ -1,4 +1,4 @@
-﻿@model Data.Models.Policy
+﻿@* @model Data.Models.Policy
 
 <style>
     label {
@@ -32,4 +32,76 @@
     <button type="submit">Add</button>
 </form>
 
-<a asp-action="All">Back to List</a>
+<a asp-action="All">Back to List</a> *@
+
+
+<div id="validation-success"></div>
+@(Html.Kendo().Form<Policy>()
+    .Name("form")
+    .HtmlAttributes(new { action = "Add", method = "POST" })
+    .Validatable(v =>
+    {
+        v.ValidateOnBlur(true);
+        v.ValidationSummary(vs => vs.Enable(false));
+    })
+    .Items(items =>
+    {
+        items.AddGroup()
+            .Label("Add New Policy")
+            .Items(i =>
+            {
+                i.Add()
+                    .Field(f => f.CustomerId)
+                    .Label(l => l.Text("Customer"))
+                    .Editor(e => e.DropDownList()
+                        .BindTo((IEnumerable<SelectListItem>)ViewBag.Customers)
+                    );
+
+                i.Add()
+                    .Field(f => f.PolicyType)
+                    .Label(l => l.Text("Policy type:"));
+
+                i.Add()
+                    .Field(f => f.StartDate)
+                    .Label(l => l.Text("Start date:"))
+                    .Editor(e => e.DatePicker());
+
+                i.Add()
+                    .Field(f => f.EndDate)
+                    .Label(l => l.Text("End date:"))
+                    .Editor(e => e.DatePicker());
+
+                i.Add()
+                    .Field(f => f.PremiumAmount)
+                    .Label(l => l.Text("Premium amount:"));
+            });
+    })
+    .Events(ev => ev.ValidateField("onFormValidateField").Submit("onFormSubmit").Clear("onFormClear"))
+)
+
+<style>
+    label {
+        color: whitesmoke;
+    }
+
+    .k-form fieldset legend {
+        color: whitesmoke;
+    }
+</style>
+
+<script>
+    function onFormValidateField(e) {
+        $("#validation-success").html("");
+    }
+
+    function onFormSubmit(e) {
+        if (!$("#form").valid()) {
+            e.preventDefault();
+        }
+    }
+
+    function onFormClear(e) {
+        $("#validation-success").html("");
+    }
+</script>
+
