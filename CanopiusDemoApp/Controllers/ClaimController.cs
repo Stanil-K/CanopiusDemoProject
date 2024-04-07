@@ -1,5 +1,6 @@
 ﻿using Data.Models;
 using Data.Repositories;
+using Humanizer;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.AspNetCore.Mvc;
@@ -52,6 +53,7 @@ namespace CanopiusDemoApp.Controllers
             var policiesWithoutClaims = policyRepository.GetAll()
                                                             .Where(p => !claimRepository.GetAll().Any(c => c.PolicyId == p.Id))
                                                             .ToList();
+
             ViewBag.PoliciesWithoutClaims = new SelectList(policiesWithoutClaims, "Id", "PolicyType");
 
             return View();

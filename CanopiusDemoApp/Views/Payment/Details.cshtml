@@ -12,11 +12,14 @@
         panelbar.Add().Text("Payment name: " + Model.PaymentType).HtmlAttributes(new { @class = "panel-text" });
         panelbar.Add().Text("Payment amount: " + Model.PaymentAmount).HtmlAttributes(new { @class = "panel-text" });
         panelbar.Add().Text("Payment date: " + Model.PaymentDate.ToShortDateString()).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Actions").Expanded(false).Items(actions =>
+        {
+            actions.Add().Text("Update Payment Information").Action("Update", "Payment", new { id = Model.Id });
+            actions.Add().Text("Back to List").Action("All", "Payment");
+        });
 
     })
 )
-<a asp-action="Update" class="custom-link">Update Payment Information</a>
-<a asp-action="All" class="custom-link">Back to List</a>
 
 <style>
     h4{

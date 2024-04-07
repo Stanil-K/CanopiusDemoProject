@@ -12,10 +12,13 @@
         panelbar.Add().Text("Phone: " + Model.Phone).HtmlAttributes(new { @class = "panel-text" });
         panelbar.Add().Text("Email: " + Model.Email).HtmlAttributes(new { @class = "panel-text" });
         panelbar.Add().Text("Date of Birth: " + Model.DateofBirth.ToShortDateString()).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Actions").Expanded(false).Items(actions =>
+        {
+            actions.Add().Text("Update Customer Information").Action("Update", "Customer", new{ id = Model.Id});
+            actions.Add().Text("Back to List").Action("All", "Customer");
+        });
     })
 )
-<a asp-action="Update" class="custom-link">Update Customer Information</a>
-<a asp-action="All" class="custom-link">Back to List</a>
 
 <style>
     h4{

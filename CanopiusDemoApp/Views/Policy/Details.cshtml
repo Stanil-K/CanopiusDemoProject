@@ -12,10 +12,13 @@
         panelbar.Add().Text("Start date: " + Model.StartDate.ToShortDateString()).HtmlAttributes(new { @class = "panel-text" });
         panelbar.Add().Text("End date: " + Model.EndDate.ToShortDateString()).HtmlAttributes(new { @class = "panel-text" });
         panelbar.Add().Text("Premium amount: " + Model.PremiumAmount).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Actions").Expanded(false).Items(actions =>
+        {
+            actions.Add().Text("Update Policy Information").Action("Update", "Policy", new { id = Model.Id });
+            actions.Add().Text("Back to List").Action("All", "Policy");
+        });
     })
 )
-<a asp-action="Update" class="custom-link">Update Policy Information</a>
-<a asp-action="All" class="custom-link">Back to List</a>
 
 <style>
     h4{

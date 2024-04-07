@@ -39,6 +39,7 @@ namespace Data.Repositories
 
             if (claimToUpdate != null)
             {
+                claimToUpdate.Id = claim.Id;
                 claimToUpdate.ClaimDescription = claim.ClaimDescription;
                 claimToUpdate.ClaimAmount = claim.ClaimAmount;
                 claimToUpdate.ClaimStatus = claim.ClaimStatus;

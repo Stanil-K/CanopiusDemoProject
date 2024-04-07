@@ -12,10 +12,13 @@
         panelbar.Add().Text("Claim status: " + Model.ClaimStatus).HtmlAttributes(new { @class = "panel-text" });
         panelbar.Add().Text("Claim description: " + Model.ClaimDescription).HtmlAttributes(new { @class = "panel-text" });
         panelbar.Add().Text("Date of Claim: " + Model.DateOfClaim.ToShortDateString()).HtmlAttributes(new { @class = "panel-text" });
+        panelbar.Add().Text("Actions").Expanded(false).Items(actions =>
+        {
+            actions.Add().Text("Update Claim Information").Action("Update", "Claim", new { id = Model.Id });
+            actions.Add().Text("Back to List").Action("All", "Claim");
+        });
     })
 )
-<a asp-action="Update" class="custom-link">Update Claim Information</a>
-<a asp-action="All" class="custom-link">Back to List</a>
 
 <style>
     h4{

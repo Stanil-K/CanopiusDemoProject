@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Models
@@ -12,6 +13,7 @@ namespace Data.Models
         public int PolicyId { get; set; }
         public Policy Policy { get; set; }
 
+        [DisplayName("Date of Claim")]
         public DateTime DateOfClaim { get; set; }
 
         [Range(0, 99999999.99)]
