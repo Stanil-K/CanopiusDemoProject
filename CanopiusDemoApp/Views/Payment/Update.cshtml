@@ -1,36 +1,70 @@
-﻿@model Data.Models.Payment
+﻿<div id="validation-success"></div>
+@(Html.Kendo().Form<Payment>()
+    .Name("form")
+    .HtmlAttributes(new { action = "Update", method = "POST" })
+    .Validatable(v =>
+    {
+        v.ValidateOnBlur(true);
+        v.ValidationSummary(vs => vs.Enable(false));
+    })
+    .Items(items =>
+    {
+        items.AddGroup()
+            .Label("Update Payment Information")
+            .Items(i =>
+            {
+                i.Add()
+                    .Field(f => f.PolicyID)
+                    .Label(l => l.Text("Policy ID:"));
+
+                i.Add()
+                    .Field(f => f.PaymentAmount)
+                    .Label(l => l.Text("Payment amount:"));
+
+                i.Add()
+                    .Field(f => f.PaymentDate)
+                    .Label(l => l.Text("End date:"))
+                    .Editor(e => e.DatePicker());
+
+                i.Add()
+                    .Field(f => f.Id)
+                    .Label(l => l.Text("Payment ID:"))
+                    .Editor(e => e.Hidden());
+            });
+    })
+    .Events(ev => ev.ValidateField("onFormValidateField").Submit("onFormSubmit").Clear("onFormClear"))
+)
+
+
+<script>
+    function onFormValidateField(e) {
+        $("#validation-success").html("");
+    }
+
+    function onFormSubmit(e) {
+        if (!$("#form").valid()) {
+            e.preventDefault();
+        }
+    }
+
+
+    function onFormClear(e) {
+        $("#validation-success").html("");
+    }
+</script>
 
 <style>
     label {
         color: whitesmoke;
     }
+
+    .k-form fieldset legend {
+        color: whitesmoke;
+    }
+
+    .k-form-buttons button {
+        color: indigo;
+        background-color: whitesmoke;
+    }
 </style>
 
-<h1>Edit Payment</h1>
-
-<form asp-action="Update" method="post">
-    <input type="hidden" asp-for="Id" />
-    <div>
-        <label asp-for="PolicyID">Policy ID</label>
-        <input asp-for="PolicyID" />
-    </div>
-    <div>
-        <label asp-for="ClaimId">Claim ID</label>
-        <input asp-for="ClaimId" />
-    </div>
-    <div>
-        <label asp-for="PaymentDate">Payment Date</label>
-        <input asp-for="PaymentDate" type="date" />
-    </div>
-    <div>
-        <label asp-for="PaymentAmount">Payment Amount</label>
-        <input asp-for="PaymentAmount" />
-    </div>
-    <div>
-        <label asp-for="PaymentType">Payment Type</label>
-        <input asp-for="PaymentType" />
-    </div>
-    <button type="submit">Update</button>
-</form>
-
-<a asp-action="All">Back to List</a>
