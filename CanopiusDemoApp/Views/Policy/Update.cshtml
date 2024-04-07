@@ -1,36 +1,80 @@
-﻿@model Data.Models.Policy
+﻿<div id="validation-success"></div>
+@(Html.Kendo().Form<Policy>()
+    .Name("form")
+    .HtmlAttributes(new { action = "Update", method = "POST" })
+    .Validatable(v =>
+    {
+        v.ValidateOnBlur(true);
+        v.ValidationSummary(vs => vs.Enable(false));
+    })
+    .Items(items =>
+    {
+        items.AddGroup()
+            .Label("Update Policy Information")
+            .Items(i =>
+            {
+                i.Add()
+                    .Field(f => f.CustomerId)
+                    .Label(l => l.Text("Customer ID:"));
+
+                i.Add()
+                    .Field(f => f.PolicyType)
+                    .Label(l => l.Text("Policy type:"));
+
+                i.Add()
+                    .Field(f => f.StartDate)
+                    .Label(l => l.Text("Start date:"))
+                    .Editor(e => e.DatePicker());
+
+                i.Add()
+                    .Field(f => f.EndDate)
+                    .Label(l => l.Text("End date:"))
+                    .Editor(e => e.DatePicker());
+
+                i.Add()
+                    .Field(f => f.PremiumAmount)
+                    .Label(l => l.Text("Premium amount:"));
+
+
+                i.Add()
+                    .Field(f => f.Id)
+                    .Label(l => l.Text("Policy ID:"))
+                    .Editor(e => e.Hidden());
+            });
+    })
+    .Events(ev => ev.ValidateField("onFormValidateField").Submit("onFormSubmit").Clear("onFormClear"))
+)
+
+
+<script>
+    function onFormValidateField(e) {
+        $("#validation-success").html("");
+    }
+
+    function onFormSubmit(e) {
+        if (!$("#form").valid()) {
+            e.preventDefault();
+        }
+    }
+
+
+    function onFormClear(e) {
+        $("#validation-success").html("");
+    }
+</script>
 
 <style>
-    label {
+    label{
+        color:whitesmoke;
+    }
+
+    .k-form fieldset legend{
         color: whitesmoke;
+    }
+
+    .k-form-buttons button {
+        color: indigo;
+        background-color: whitesmoke;
     }
 </style>
 
-<h1>Edit Policy</h1>
-
-<form asp-action="Update" method="post">
-    <input type="hidden" asp-for="Id" />
-    <div>
-        <label asp-for="CustomerId">Customer ID</label>
-        <input asp-for="CustomerId" />
-    </div>
-    <div>
-        <label asp-for="PolicyType">Policy Type</label>
-        <input asp-for="PolicyType" />
-    </div>
-    <div>
-        <label asp-for="StartDate">Start Date</label>
-        <input asp-for="StartDate" type="date" />
-    </div>
-    <div>
-        <label asp-for="EndDate">End Date</label>
-        <input asp-for="EndDate" type="date" />
-    </div>
-    <div>
-        <label asp-for="PremiumAmount">Premium Amount</label>
-        <input asp-for="PremiumAmount" />
-    </div>
-    <button type="submit">Update</button>
-</form>
-
-<a asp-action="All">Back to List</a>

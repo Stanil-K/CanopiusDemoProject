@@ -1,41 +1,4 @@
-﻿@* @model Data.Models.Policy
-
-<style>
-    label {
-        color: whitesmoke;
-    }
-</style>
-
-<h1>Add Policy</h1>
-
-<form asp-action="Add" method="post">
-    <div>
-        <label asp-for="CustomerId">Customer ID</label>
-        <select asp-for="CustomerId" asp-items="@ViewBag.Customers"></select>
-    </div>
-    <div>
-        <label asp-for="PolicyType">Policy Type</label>
-        <input asp-for="PolicyType" />
-    </div>
-    <div>
-        <label asp-for="StartDate">Start Date</label>
-        <input asp-for="StartDate" type="date" />
-    </div>
-    <div>
-        <label asp-for="EndDate">End Date</label>
-        <input asp-for="EndDate" type="date" />
-    </div>
-    <div>
-        <label asp-for="PremiumAmount">Premium Amount</label>
-        <input asp-for="PremiumAmount" />
-    </div>
-    <button type="submit">Add</button>
-</form>
-
-<a asp-action="All">Back to List</a> *@
-
-
-<div id="validation-success"></div>
+﻿<div id="validation-success"></div>
 @(Html.Kendo().Form<Policy>()
     .Name("form")
     .HtmlAttributes(new { action = "Add", method = "POST" })
