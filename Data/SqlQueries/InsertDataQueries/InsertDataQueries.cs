@@ -79,18 +79,18 @@
 
         //  Insert data into Payments query
 
-    //    INSERT INTO CanopiusDemoApp.dbo.Payments(PolicyID, ClaimId, PaymentDate, PaymentAmount, PaymentType)
+    //    INSERT INTO CanopiusDemoApp.dbo.Payments(ClaimId, PaymentDate, PaymentAmount, PaymentType)
     //    VALUES
-    //        (1, 1, '2023-03-01', 1000.00, 'Premium Payment'),
-    //        (2, 2, '2022-07-01', 200.00, 'Claim Payment'),
-    //        (3, 3, '2021-12-01', 300.00, 'Premium Payment'),
-    //        (4, 4, '2023-05-01', 4000.00, 'Claim Payment'),
-    //        (5, 5, '2024-09-01', 150.00, 'Premium Payment'),
-    //        (6, 6, '2022-01-01', 50.00, 'Premium Payment'),
-    //        (7, 7, '2023-07-01', 200.00, 'Claim Payment'),
-    //        (8, 8, '2024-01-01', 500.00, 'Premium Payment'),
-    //        (9, 9, '2023-05-01', 4000.00, 'Premium Payment'),
-    //        (10, 10, '2022-10-01', 3000.00, 'Claim Payment');
+    //        (1, '2023-03-01', 1000.00, 'Premium Payment'),
+    //        (2, '2022-07-01', 200.00, 'Claim Payment'),
+    //        (3, '2021-12-01', 300.00, 'Premium Payment'),
+    //        (4, '2023-05-01', 4000.00, 'Claim Payment'),
+    //        (5, '2024-09-01', 150.00, 'Premium Payment'),
+    //        (6, '2022-01-01', 50.00, 'Premium Payment'),
+    //        (7, '2023-07-01', 200.00, 'Claim Payment'),
+    //        (8, '2024-01-01', 500.00, 'Premium Payment'),
+    //        (9, '2023-05-01', 4000.00, 'Premium Payment'),
+    //        (10, '2022-10-01', 3000.00, 'Claim Payment');
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
