@@ -4,6 +4,7 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace CanopiusDemoApp.Controllers
 {
@@ -27,7 +28,8 @@ namespace CanopiusDemoApp.Controllers
         [HttpGet]   
         public IActionResult All()
         {
-            return View();
+            List<Payment> payments = paymentRepository.GetAll();
+            return View(payments);
         }
 
         [HttpPost]
@@ -35,6 +37,14 @@ namespace CanopiusDemoApp.Controllers
         {
             List<Payment> payments = paymentRepository.GetAll();
             return Json(payments.ToDataSourceResult(request));
+        }
+
+        [HttpGet]
+        public IActionResult GetClaimsByPolicyJSON()
+        {
+            var claim = claimRepository.GetAll().Where(p => p.ClaimStatus == "Approved").ToList();
+
+            return Json(claim);
         }
 
         [HttpGet]
@@ -56,12 +66,12 @@ namespace CanopiusDemoApp.Controllers
         public IActionResult Add()
         {
 
-            ViewBag.Policies = policyRepository.GetAll()
-                                               .Where(p => claimRepository.GetAll().Any(c => c.PolicyId == p.Id && c.ClaimStatus == "Approved"))
+            ViewBag.Claims = claimRepository.GetAll()
+                                               .Where(c => c.ClaimStatus == "Approved")
                                                .Select(p => new SelectListItem
                                                {
                                                    Value = p.Id.ToString(),
-                                                   Text = $"{p.Id} - {p.PolicyType}"
+                                                   Text = $"{p.Id} - {p.ClaimAmount}"
                                                })
                                                .ToList();
             return View();
@@ -76,9 +86,9 @@ namespace CanopiusDemoApp.Controllers
 
                 return RedirectToAction("All");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("An error occurred while adding payment");
+                throw new Exception($"An error occurred while adding payment - {ex.Message}");
             }
         }
 

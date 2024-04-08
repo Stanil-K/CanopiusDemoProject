@@ -1,44 +1,4 @@
-﻿@* @model List<Data.Models.Payment>
-
-<h1>All Payments</h1>
-
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>Payment ID</th>
-            <th>Policy ID</th>
-            <th>Claim ID</th>
-            <th>Payment Date</th>
-            <th>Payment Amount</th>
-            <th>Payment Type</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var payment in Model)
-        {
-            <tr>
-                <td>@payment.Id</td>
-                <td>@payment.PolicyID</td>
-                <td>@payment.ClaimId</td>
-                <td>@payment.PaymentDate.ToShortDateString()</td>
-                <td>@payment.PaymentAmount</td>
-                <td>@payment.PaymentType</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@payment.Id" class="link-secondary">Details</a> |
-                    <a asp-action="Update" asp-route-id="@payment.Id" class="link-warning">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@payment.Id" class="link-danger">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<a asp-action="Add">Add New Payment</a>
-
- *@
- 
-<h4>All Payments</h4>
+﻿<h4>All Payments</h4>
 
 @(Html.Kendo().Grid<Payment>()
     .Name("grid")
@@ -51,7 +11,7 @@
                 {
                     command.Custom("Update").Text("Update").Click("onUpdate");
                     command.Custom("Details").Text("Details").Click("onDetails");
-                    command.Destroy();
+                    command.Custom("Delete").Text("Delete").Click("onDelete");
                 }).Width(300);
     })
     .ToolBar(t =>
@@ -84,6 +44,12 @@
         e.preventDefault();
         var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
         window.location.href = '/Payment/Details/' + dataItem.Id;
+    }
+
+    function onDelete(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        window.location.href = '/Payment/Delete/' + dataItem.Id;
     }
 
 </script>

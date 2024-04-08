@@ -1,79 +1,64 @@
-﻿@model Data.Models.Payment
+﻿<div id="validation-success"></div>
+@(Html.Kendo().Form<Payment>()
+    .Name("form")
+    .HtmlAttributes(new { action = "Add", method = "POST" })
+    .Validatable(v =>
+    {
+        v.ValidateOnBlur(true);
+        v.ValidationSummary(vs => vs.Enable(false));
+    })
+    .Items(items =>
+    {
+        items.AddGroup()
+            .Label("Add New Payment")
+            .Items(i =>
+            {
+                i.Add()
+                    .Field(f => f.ClaimId)
+                    .Label(l => l.Text("Claim:"))
+                    .Editor(e => e.DropDownList()
+                        .BindTo((IEnumerable<SelectListItem>)ViewBag.Claims)
+                    );
+
+                i.Add()
+                    .Field(f => f.PaymentAmount)
+                    .Label(l => l.Text("Payment amount:"));
+
+                i.Add()
+                    .Field(f => f.PaymentType)
+                    .Label(l => l.Text("Payment type:"));
+
+                i.Add()
+                    .Field(f => f.PaymentDate)
+                    .Label(l => l.Text("Payment date:"))
+                    .Editor(e => e.DatePicker());
+            });
+    })
+    .Events(ev => ev.ValidateField("onFormValidateField").Submit("onFormSubmit").Clear("onFormClear"))
+)
 
 <style>
     label {
         color: whitesmoke;
     }
 
+    .k-form fieldset legend {
+        color: whitesmoke;
+    }
 </style>
 
-<h1>Add Payment</h1>
-
-<form asp-action="Add" method="post">
-    <div>
-        <select id="policySelect" asp-for="PolicyID" asp-items="@ViewBag.Policies"></select>
-        <select id="claimsSelect" asp-for="ClaimId"></select>
-    </div>
-    <div>
-        <label asp-for="PaymentDate">Payment Date</label>
-        <input asp-for="PaymentDate" type="date" />
-    </div>
-    <div>
-        <label asp-for="PaymentAmount">Payment Amount</label>
-        <input asp-for="PaymentAmount" />
-    </div>
-    <div>
-        <label asp-for="PaymentType">Payment Type</label>
-        <input asp-for="PaymentType" />
-    </div>
-    <button type="submit">Add</button>
-</form>
-
-<a asp-action="All">Back to List</a>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#policySelect').change(function () {
-            var policyId = $(this).val();
-            $.getJSON('/Payment/GetClaimsByPolicy', { policyId: policyId }, function (data) {
-                var items = '<option>Select a claim</option>';
-                $.each(data, function (i, claim) {
-                    items += "<option value='" + claim.value + "'>" + claim.text + "</option>";
-                });
-                $('#claimsSelect').html(items);
-            });
-        });
-    });
+    function onFormValidateField(e) {
+        $("#validation-success").html("");
+    }
+
+    function onFormSubmit(e) {
+        if (!$("#form").valid()) {
+            e.preventDefault();
+        }
+    }
+
+    function onFormClear(e) {
+        $("#validation-success").html("");
+    }
 </script>
-
-@* @model Data.Models.Payment
-
-<h1>Add Payment</h1>
-
-<form asp-action="Add" method="post">
-    <div>
-        <label asp-for="PolicyID">Policy</label>
-        <select asp-for="PolicyID" asp-items="@ViewBag.Policies" ></select>
-    </div>
-    <div>
-        <label asp-for="ClaimId">Claim Status</label>
-        <select asp-for="ClaimId" asp-items="@ViewBag.Claims"></select>
-    </div>
-    <div>
-        <label asp-for="PaymentDate">Payment Date</label>
-        <input asp-for="PaymentDate" type="date" />
-    </div>
-    <div>
-        <label asp-for="PaymentAmount">Payment Amount</label>
-        <input asp-for="PaymentAmount" />
-    </div>
-    <div>
-        <label asp-for="PaymentType">Payment Type</label>
-        <input asp-for="PaymentType" />
-    </div>
-    <button type="submit">Add</button>
-</form>
-
-<a asp-action="All">Back to List</a>
- *@

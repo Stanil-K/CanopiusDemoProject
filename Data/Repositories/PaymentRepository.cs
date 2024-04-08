@@ -42,7 +42,7 @@ namespace Data.Repositories
             {
                 paymentToUpdate.PaymentDate = payment.PaymentDate;
                 paymentToUpdate.PaymentAmount = payment.PaymentAmount;
-                paymentToUpdate.PolicyID = payment.PolicyID;
+                paymentToUpdate.PaymentType = payment.PaymentType;
 
                 context.SaveChanges();
             }

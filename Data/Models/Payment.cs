@@ -8,11 +8,6 @@ namespace Data.Models
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey(nameof(Policy))]
-        public int PolicyID { get; set; }
-        public Policy Policy { get; set; }
-
-
         [ForeignKey(nameof(Claim))]
         public int ClaimId { get; set; }
         public Claim Claim { get; set; }

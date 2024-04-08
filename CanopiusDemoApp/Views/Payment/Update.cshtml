@@ -14,12 +14,12 @@
             .Items(i =>
             {
                 i.Add()
-                    .Field(f => f.PolicyID)
-                    .Label(l => l.Text("Policy ID:"));
-
-                i.Add()
                     .Field(f => f.PaymentAmount)
                     .Label(l => l.Text("Payment amount:"));
+
+                i.Add()
+                    .Field(f => f.PaymentType)
+                    .Label(l => l.Text("Payment type:"));
 
                 i.Add()
                     .Field(f => f.PaymentDate)
