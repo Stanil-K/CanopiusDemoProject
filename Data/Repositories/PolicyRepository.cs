@@ -68,12 +68,5 @@ namespace Data.Repositories
             }
         }
 
-        public List<int> GetCustomerIds()
-        {
-            return context.Policies
-                .AsNoTracking()
-                .Select(p => p.CustomerId)
-                .ToList();
-        }
     }
 }

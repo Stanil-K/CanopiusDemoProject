@@ -67,14 +67,5 @@ namespace Data.Repositories
                 throw new Exception($"Claim with {id} not found");
             }
         }
-
-        public List<Claim> AllClaimsWithDistinctStatus()
-        {
-            return context.Claims
-                    .AsNoTracking()
-                    .GroupBy(c => c.ClaimStatus)
-                    .Select(g => g.First())
-                    .ToList();
-        }
     }
 }

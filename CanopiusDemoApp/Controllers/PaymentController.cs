@@ -4,7 +4,6 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
 namespace CanopiusDemoApp.Controllers
 {
@@ -12,15 +11,12 @@ namespace CanopiusDemoApp.Controllers
     {
 
         private readonly PaymentRepository paymentRepository;
-        private readonly PolicyRepository policyRepository;
         private readonly ClaimRepository claimRepository;
 
         public PaymentController(PaymentRepository _paymentRepository,
-                                 PolicyRepository _policyRepository, 
                                  ClaimRepository _claimRepository)
         {
             paymentRepository = _paymentRepository;
-            policyRepository = _policyRepository;
             claimRepository = _claimRepository; 
 
         }
