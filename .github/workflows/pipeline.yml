@@ -13,14 +13,26 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore
+        dotnet-version: 6.x
+    - name: Install EntityFramework Core Diagnostics
+      run: dotnet add package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore --version 6.0.25
+    - name: Install Identity EntityFramework
+      run: dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore --version 6.0.25
+    - name: Install Identity UI 
+      run: dotnet add package Microsoft.AspNetCore.Identity.UI --version 6.0.25
+    - name: Install EntityFramework Core Abstractions
+      run: dotnet add package Microsoft.EntityFrameworkCore.Abstractions --version 6.0.25
+    - name: Install EntityFramework Core SqlServer
+      run: dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 6.0.25
+    - name: Install EntityFramework Core SqlServer
+      run: dotnet add package Microsoft.EntityFrameworkCore.Tools --version 6.0.25
+    - name: Install EntityFramework Core SqlServer
+      run: dotnet add package Telerik.UI.for.AspNet.Core --version 2024.1.319
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build
